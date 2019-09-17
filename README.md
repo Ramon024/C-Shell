@@ -1,2 +1,45 @@
 # C-Shell
-Built a Unix command-line shell using C, for Unix operating systems.
+Name:
+    NSH - Not a SHell 
+
+Synopsis: 
+    nsh [file]
+
+Description:
+    NSH is a simple Unix command-line shell called "nsh", created for unix operating 
+    systems. It supports some of the basic functionality of a Bourne-Again SHell like shell 
+    scripts, I/O redirection (including append), piping of multiple commands, the running of 
+    arbitrary commands with arguments, the “cd” command, the “exit” command and 
+    background processes. The user will be prompted by a '?' ie., a question mark followed 
+    by a space; and will interpret commands given from the user until the user prompts “exit” 
+    or force closes the program using ^D. 
+
+Functionality:
+    1.  Shell Scripts: If a shell script file is given to NSH, then nsh will read from argv and  
+        execute the shell script file without printing to the prompt then it’ll terminate NSH.
+    2.  Executing Commands: NSH can execute any valid commands inside your path variable
+        by using execvpe. When successful NSH will execute the command, when not successful 
+        NSH will print and error message to stderr saying command not found. NSH does not 
+        support single, double or back quoting arguments.
+    3.  I/O redirection:  NSH can handle redirection of input and output (also append). NSH 
+        allows input to be read using '<' character from a file rather than from stdin stream.  NSH 
+        allows output to be read using '>'  character or it allows output to be appended using '>>'  
+        character, from a file rather than from stdout stream. 
+    4.  Piping: NSH allows piping of multiple commands using the '|'  character in between. The 
+        left side of the pipe’s command will be executed and its output will be directed to the 
+        input of the right side of the pipe. 
+    5.  cd: NSH allows the user to change directories from the current working directory, using 
+        the “cd” command. If successful then the user will be in the new directory. If a directory 
+        doesn't exists then an error message will be printed to stderr. 
+    6.  exit: NSH allows the user to exit from NSH, using the “exit” command. Once prompted 
+        NSH will print the exit status of the most recently executed command.
+    7.  Background Processes: NSH allows the user to run processes in  the background by using 
+        the '&' at the end of the command. Once the process terminates the program will reap the 
+        process. 
+
+Makefile:
+    The Makefile has two options:
+        1.  make: Builds NSH into an executable file named “nsh”. To run NSH simply just 
+            type “./nsh” onto the terminal or “./nsh shellScriptFile” to execute the shell script 
+            file onto NSH.
+        2.  make clean: Cleans/removes the executable file “nsh”.
